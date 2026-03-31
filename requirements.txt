@@ -1,0 +1,23 @@
+# Core LangChain ecosystem
+langchain
+langchain-core
+langchain-community
+
+# LLM providers
+groq
+langchain-groq
+
+# LangGraph (recommended for workflow control)
+langgraph
+
+# CLI framework
+typer[all]
+
+# Utilities
+python-dotenv
+pydantic
+rich
+
+# Optional but useful
+gitpython        # safer git operations instead of subprocess
+tqdm             # progress bars
