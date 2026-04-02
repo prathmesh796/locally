@@ -1,5 +1,4 @@
-from langchain.agents import create_agent
-from langchain_classic.agents import AgentExecutor
+from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate
 from core.llm import get_llm
@@ -38,7 +37,7 @@ def run_setup_and_start(target_path: str, detected_stacks: list):
         ("placeholder", "{agent_scratchpad}"),
     ])
 
-    agent = create_agent(llm, tools, prompt)
+    agent = create_tool_calling_agent(llm, tools, prompt)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
 
     console.print(f"[bold blue]Initializing Setup Agent for:[/bold blue] {target_path}")
