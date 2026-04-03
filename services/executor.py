@@ -29,8 +29,8 @@ def execute_command(command: str, cwd: str, timeout: int = 60) -> Dict[str, Any]
         return {
             "command": command,
             "return_code": 0,
-            "stdout": e.stdout.decode('utf-8', errors='ignore') if e.stdout else "Process is still running (Timeout reached). Likely a server started successfully.",
-            "stderr": e.stderr.decode('utf-8', errors='ignore') if e.stderr else "",
+            "stdout": e.stdout if e.stdout is not None else "Process is still running (Timeout reached). Likely a server started successfully.",
+            "stderr": e.stderr if e.stderr is not None else "",
             "status": "timeout"
         }
     except Exception as e:
