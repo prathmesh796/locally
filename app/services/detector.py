@@ -1,7 +1,7 @@
 import os
 from typing import List
-from utils.constants import STACK_FILES
-from utils.logger import logger, console
+from app.utils.constants import STACK_FILES
+from app.utils.logger import logger, console
 
 def detect_stack(target_path: str) -> List[str]:
     detected = []

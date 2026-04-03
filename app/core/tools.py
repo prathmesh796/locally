@@ -1,6 +1,6 @@
 import os
 from langchain.tools import tool
-from services.executor import execute_command
+from app.services.executor import execute_command
 
 @tool
 def run_shell_command(command: str, cwd: str) -> str:

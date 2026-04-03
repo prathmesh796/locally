@@ -1,5 +1,5 @@
 from langchain_groq import ChatGroq
-from config.settings import settings
+from app.config.settings import settings
 
 def get_llm():
     if not settings.GROQ_API_KEY:

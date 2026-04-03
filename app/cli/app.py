@@ -3,10 +3,10 @@ import os
 from typing import Optional
 from rich.console import Console
 
-from services.repo import clone_repo
-from services.detector import detect_stack
-from core.agent import run_setup_and_start
-from utils.logger import logger
+from app.services.repo import clone_repo
+from app.services.detector import detect_stack
+from app.core.agent import run_setup_and_start
+from app.utils.logger import logger
 
 app = typer.Typer(help="Locally - AI powered CLI tool to clone and run any repo.", add_completion=False)
 console = Console()

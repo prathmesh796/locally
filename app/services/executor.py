@@ -1,6 +1,6 @@
 import subprocess
 from typing import Dict, Any
-from utils.logger import logger, console
+from app.utils.logger import logger, console
 
 def execute_command(command: str, cwd: str, timeout: int = 60) -> Dict[str, Any]:
     """Execute a shell command and return its output. Includes a timeout for long-running processes."""

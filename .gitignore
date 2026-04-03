@@ -2,3 +2,6 @@
 .env
 **/__pycache__
 /test_clone
+/locally.egg-info
+/dist
+BUILD-STEPS.md

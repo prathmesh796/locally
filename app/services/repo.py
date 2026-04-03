@@ -1,6 +1,6 @@
 import os
 import git
-from utils.logger import logger, console
+from app.utils.logger import logger, console
 
 def clone_repo(repo_url: str, target_path: str) -> bool:
     try:

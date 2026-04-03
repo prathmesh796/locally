@@ -1,9 +1,9 @@
 from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate
-from core.llm import get_llm
-from core.tools import run_shell_command, read_file, list_dir, write_file
-from utils.logger import logger, console
+from app.core.llm import get_llm
+from app.core.tools import run_shell_command, read_file, list_dir, write_file
+from app.utils.logger import logger, console
 
 AGENT_SYSTEM_PROMPT = """You are a senior DevOps engineer and setup assistant.
 Your task is to properly setup and run a software project.
