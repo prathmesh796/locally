@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from typing import Dict, Any
 from app.utils.logger import logger, console
 
@@ -8,31 +9,44 @@ def execute_command(command: str, cwd: str, timeout: int = 60) -> Dict[str, Any]
     console.print(f"[dim]Running:[/dim] {command}")
     
     try:
-        result = subprocess.run(
+        process = subprocess.Popen(
             command,
             cwd=cwd,
             shell=True,
             text=True,
-            capture_output=True,
-            timeout=timeout
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
         )
-        return {
-            "command": command,
-            "return_code": result.returncode,
-            "stdout": result.stdout.strip(),
-            "stderr": result.stderr.strip(),
-            "status": "completed"
-        }
-    except subprocess.TimeoutExpired as e:
-        logger.warning(f"Execution timed out after {timeout} seconds.")
-        # If it times out, it might be a successfully running server like Next.js
-        return {
-            "command": command,
-            "return_code": 0,
-            "stdout": e.stdout if e.stdout is not None else "Process is still running (Timeout reached). Likely a server started successfully.",
-            "stderr": e.stderr if e.stderr is not None else "",
-            "status": "timeout"
-        }
+        
+        try:
+            stdout, stderr = process.communicate(timeout=timeout)
+            return {
+                "command": command,
+                "return_code": process.returncode,
+                "stdout": stdout.strip() if stdout else "",
+                "stderr": stderr.strip() if stderr else "",
+                "status": "completed"
+            }
+        except subprocess.TimeoutExpired:
+            logger.warning(f"Execution timed out after {timeout} seconds.")
+            
+            if sys.platform == "win32":
+                subprocess.run(f"taskkill /F /T /PID {process.pid}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            else:
+                process.kill()
+                
+            try:
+                stdout, stderr = process.communicate(timeout=2)
+            except subprocess.TimeoutExpired:
+                stdout, stderr = "Process is still running (Timeout reached). Likely a server started successfully.", ""
+                
+            return {
+                "command": command,
+                "return_code": 0,
+                "stdout": stdout.strip() if stdout else "Process is still running (Timeout reached). Likely a server started successfully.",
+                "stderr": stderr.strip() if stderr else "",
+                "status": "timeout"
+            }
     except Exception as e:
         logger.error(f"Execution failed: {e}")
         return {
