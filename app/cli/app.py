@@ -12,6 +12,18 @@ app = typer.Typer(help="Locally - AI powered CLI tool to clone and run any repo.
 console = Console()
 
 @app.command()
+def set_key(api_key: str = typer.Argument(..., help="Your Groq API Key")):
+    """Sets the global Groq API key for Locally."""
+    home_dir = os.path.expanduser("~/.locally")
+    os.makedirs(home_dir, exist_ok=True)
+    env_file = os.path.join(home_dir, ".env")
+    
+    with open(env_file, "w") as f:
+        f.write(f"GROQ_API_KEY={api_key}\n")
+    
+    console.print("[bold green]✅ API Key saved successfully![/bold green] You can now run `locally` from anywhere.")
+
+@app.command()
 def clone_and_run(
     repo_url: str = typer.Argument(..., help="The GitHub repository URL to process"),
     path: Optional[str] = typer.Option(None, "--path", "-p", help="Destination path for cloning"),

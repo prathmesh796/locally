@@ -18,15 +18,29 @@
 ## Requirements
 
 - Python 3.11 or higher
-- A [Groq](https://console.groq.com/) API key (set as `GROQ_API_KEY` in your environment or a `.env` file)
+- A [Groq](https://console.groq.com/) API key to power the AI agent.
 
 ---
 
 ## Installation
 
+You can install `locally` globally using `pip`:
+
 ```bash
 pip install locally
 ```
+
+*(Alternatively, to install from source: clone this repo and run `pip install -e .` inside the folder.)*
+
+### Setup Your API Key
+
+Before using `locally` for the first time, you need to configure your Groq API key. The agent defaults to `llama-3.3-70b-versatile`, which is available for any standard Groq account.
+
+```bash
+locally set-key <YOUR_GROQ_API_KEY>
+```
+
+This securely saves your key in a global config file (`~/.locally/.env`), meaning you can run the tool from anywhere on your system without having to set up `.env` files manually.
 
 ---
 
@@ -46,15 +60,17 @@ locally [GITHUB_REPO_URL] --path [CLONING_PATH]
 ### Example
 
 ```bash
-locally https://github.com/prathmesh796/getlancer --path ./my-project
+locally https://github.com/prathmesh796/pubsubs --path ./test-clone
 ```
 
-This command will:
-1. Clone the repository into `./my-project`
-2. Detect the technology stack
-3. Install all dependencies
-4. Configure environment variables (if `.env.example` is present)
-5. Start the project
+This single command will autonomously:
+1. Clone the repository into `./test-clone`
+2. Detect the technology stack (e.g. Node.js, Python)
+3. Launch the LangChain Agent to investigate the codebase.
+4. Install all required dependencies (`npm install`, `pip install`, etc.)
+5. Configure environment variables (if `.env.example` is present)
+6. Start the local development server (e.g., `npm run dev`)
+7. Automatically detect and fix any deployment errors if the server fails to start!
 
 ---
 
@@ -62,8 +78,8 @@ This command will:
 
 1. **Clone** — The repo is cloned to the specified (or auto-generated) local path using GitPython.
 2. **Detect** — The stack detector inspects the repository files to identify languages and frameworks.
-3. **Agent Setup** — A LangChain agent equipped with shell, file-read, and file-write tools executes the full setup autonomously. If a command fails, the agent reads the error output, figures out the fix, and retries.
-4. **Done** — The agent reports `SETUP_COMPLETE` and summarises what it did.
+3. **Agent Setup** — A LangChain agent equipped with shell, file-read, and file-write tools executes the full setup autonomously. If a command fails or crashes, the agent reads the error output, figures out the fix, and retries until success!
+4. **Done** — The agent reports `SETUP_COMPLETE` and leaves the server running for you.
 
 ---
 

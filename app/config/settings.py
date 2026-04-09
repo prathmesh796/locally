@@ -1,6 +1,10 @@
 import os
 from dotenv import load_dotenv
 
+home_env = os.path.expanduser("~/.locally/.env")
+if os.path.exists(home_env):
+    load_dotenv(home_env)
+
 load_dotenv()
 
 class Settings:

@@ -20,6 +20,9 @@ Always execute commands in the correct `cwd` which the user provides as context.
 Important: When running a dev server that blocks (like `npm run dev`), if it prints 'compiled successfully' or starts listening on a port, consider the step SUCCESSFUL. Our executor incorporates a 60-second timeout. If it prints a timeout error but indicates a server has started, consider the operation successful.
 
 When you have successfully set everything up and run the project, respond with "SETUP_COMPLETE" and explain what you did.
+
+CRITICAL TOOL USAGE INSTRUCTION:
+When calling a tool, ensure the tool name strictly matches the function name (e.g., 'list_dir'). DO NOT put JSON arguments or string blocks inside the tool name field itself! Provide arguments normally via the valid arguments object.
 """
 
 def run_setup_and_start(target_path: str, detected_stacks: list):
