@@ -8,20 +8,20 @@ from app.services.detector import detect_stack
 from app.core.agent import run_setup_and_start
 from app.utils.logger import logger
 
-app = typer.Typer(help="Locally - AI powered CLI tool to clone and run any repo.", add_completion=False)
+app = typer.Typer(help="Locally796 - AI powered CLI tool to clone and run any repo.", add_completion=False)
 console = Console()
 
 @app.command()
 def set_key(api_key: str = typer.Argument(..., help="Your Groq API Key")):
-    """Sets the global Groq API key for Locally."""
-    home_dir = os.path.expanduser("~/.locally")
+    """Sets the global Groq API key for Locally796."""
+    home_dir = os.path.expanduser("~/.locally796")
     os.makedirs(home_dir, exist_ok=True)
     env_file = os.path.join(home_dir, ".env")
     
     with open(env_file, "w") as f:
         f.write(f"GROQ_API_KEY={api_key}\n")
     
-    console.print("[bold green]✅ API Key saved successfully![/bold green] You can now run `locally` from anywhere.")
+    console.print("[bold green]✅ API Key saved successfully![/bold green] You can now run `locally796` from anywhere.")
 
 @app.command()
 def clone_and_run(
@@ -31,7 +31,7 @@ def clone_and_run(
     """
     Clone a repository, detect stack, install dependencies, and run it.
     """
-    console.print(f"[bold blue]Starting Locally for:[/bold blue] {repo_url}")
+    console.print(f"[bold blue]Starting Locally796 for:[/bold blue] {repo_url}")
     if path:
         target_path = path
     else:

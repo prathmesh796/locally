@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-home_env = os.path.expanduser("~/.locally/.env")
+home_env = os.path.expanduser("~/.locally796/.env")
 if os.path.exists(home_env):
     load_dotenv(home_env)
 

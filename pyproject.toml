@@ -1,6 +1,6 @@
 [project]
 name = "locally796"
-version = "0.1.1"
+version = "0.1.0"
 description = "AI-powered CLI tool to setup GitHub repositories locally"
 authors = [
     { name="Prathmesh Salunkhe", email="salunkheprathmesh0@gmail.com" }
@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [project.scripts]
-locally = "app.main:app"
+locally796 = "app.main:app"
 
 [build-system]
 requires = ["setuptools>=61.0.0", "wheel"]

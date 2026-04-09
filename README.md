@@ -1,6 +1,6 @@
-# Locally
+# Locally796
 
-**Locally** is an AI-powered CLI tool that automatically clones any GitHub repository and sets it up on your local machine — no manual configuration needed. Powered by a LangChain agent, it detects the project stack, installs dependencies, configures environment variables, and runs the project for you.
+**Locally796** is an AI-powered CLI tool that automatically clones any GitHub repository and sets it up on your local machine — no manual configuration needed. Powered by a LangChain agent, it detects the project stack, installs dependencies, configures environment variables, and runs the project for you.
 
 ---
 
@@ -24,30 +24,30 @@
 
 ## Installation
 
-You can install `locally` globally using `pip`:
+You can install `locally796` globally using `pip`:
 
 ```bash
-pip install locally
+pip install locally796
 ```
 
 *(Alternatively, to install from source: clone this repo and run `pip install -e .` inside the folder.)*
 
 ### Setup Your API Key
 
-Before using `locally` for the first time, you need to configure your Groq API key. The agent defaults to `llama-3.3-70b-versatile`, which is available for any standard Groq account.
+Before using `locally796` for the first time, you need to configure your Groq API key. The agent defaults to `llama-3.3-70b-versatile`, which is available for any standard Groq account.
 
 ```bash
-locally set-key <YOUR_GROQ_API_KEY>
+locally796 set-key <YOUR_GROQ_API_KEY>
 ```
 
-This securely saves your key in a global config file (`~/.locally/.env`), meaning you can run the tool from anywhere on your system without having to set up `.env` files manually.
+This securely saves your key in a global config file (`~/.locally796/.env`), meaning you can run the tool from anywhere on your system without having to set up `.env` files manually.
 
 ---
 
 ## Usage
 
 ```bash
-locally [GITHUB_REPO_URL] --path [CLONING_PATH]
+locally796 [GITHUB_REPO_URL] --path [CLONING_PATH]
 ```
 
 ### Arguments
@@ -60,7 +60,7 @@ locally [GITHUB_REPO_URL] --path [CLONING_PATH]
 ### Example
 
 ```bash
-locally https://github.com/prathmesh796/pubsubs --path ./test-clone
+locally796 https://github.com/prathmesh796/pubsubs --path ./test-clone
 ```
 
 This single command will autonomously:

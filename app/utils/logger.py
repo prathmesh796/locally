@@ -13,4 +13,4 @@ def get_logger(name: str):
     )
     return logging.getLogger(name)
 
-logger = get_logger("locally")
+logger = get_logger("locally796")
