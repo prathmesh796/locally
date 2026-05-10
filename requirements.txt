@@ -21,3 +21,10 @@ rich
 # Optional but useful
 gitpython        # safer git operations instead of subprocess
 tqdm             # progress bars
+
+# Testing
+pytest
+pytest-mock
+pytest-asyncio
+coverage
+tox

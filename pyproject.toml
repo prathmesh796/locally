@@ -15,7 +15,7 @@ dependencies = [
     "langchain",
 ]
 
-[project.scripts]
+[project.scripts] 
 locally796 = "app.main:app"
 
 [build-system]

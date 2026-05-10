@@ -1,14 +1,16 @@
 import os
 from langchain.tools import tool
-from app.services.executor import execute_command
+from app.runner.retry_executor import execute_with_retry
 
+# Global flag set by the CLI
+auto_services_enabled = False
 @tool
 def run_shell_command(command: str, cwd: str) -> str:
     """
     Executes a shell command in the specified directory (cwd) and returns its output.
     Useful for installing dependencies, running the app, or fixing environments.
     """
-    res = execute_command(command, cwd)
+    res = execute_with_retry(command, cwd, auto_services=auto_services_enabled)
     output = f"Status: {res['status']}\nExit code: {res['return_code']}\n"
     if res['stdout']:
         output += f"STDOUT:\n{res['stdout']}\n"

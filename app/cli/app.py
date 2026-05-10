@@ -7,6 +7,8 @@ from app.services.repo import clone_repo
 from app.services.detector import detect_stack
 from app.core.agent import run_setup_and_start
 from app.utils.logger import logger
+from app.orchestrator.service_manager import pre_detect_services, process_services
+import app.core.tools as core_tools
 
 app = typer.Typer(help="Locally796 - AI powered CLI tool to clone and run any repo.", add_completion=False)
 console = Console()
@@ -27,6 +29,7 @@ def set_key(api_key: str = typer.Argument(..., help="Your Groq API Key")):
 def clone_and_run(
     repo_url: str = typer.Argument(..., help="The GitHub repository URL to process"),
     path: Optional[str] = typer.Option(None, "--path", "-p", help="Destination path for cloning"),
+    auto_services: bool = typer.Option(False, "--auto-services", help="Automatically detect and start missing services via Docker"),
 ):
     """
     Clone a repository, detect stack, install dependencies, and run it.
@@ -51,6 +54,13 @@ def clone_and_run(
 
     # Step 2: Detect Stack
     detected_stacks = detect_stack(target_path)
+
+    # Step 2.5: Pre-detect missing services
+    core_tools.auto_services_enabled = auto_services
+    if auto_services:
+        detected_services = pre_detect_services(target_path)
+        if detected_services:
+            process_services(detected_services, target_path, ask_permission=True)
 
     # Step 3: Run Setup Agent
     run_setup_and_start(target_path, detected_stacks)
